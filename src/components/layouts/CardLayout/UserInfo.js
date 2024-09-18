@@ -1,7 +1,7 @@
 const UserInfo = ({ username, followers }) => (
     <div className="flex justify-between items-center w-full">
       <div className="flex gap-2">
-        <img src="/fellows.png" alt="User Profile" width={45} height={45} className="rounded-full object-cover" priority />
+        <img src="/fellows.png" alt="User Profile" width={45} height={45} className="rounded-full object-cover" />
         <div className="block">
           <p className="font-bold">{username}</p>
           <p>{followers} pengikut</p>

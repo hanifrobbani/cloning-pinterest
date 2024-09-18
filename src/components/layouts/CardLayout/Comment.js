@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Comment = ({ username, comment }) => (
     <div className="flex justify-start mt-10 gap-4">
-      <img src="/fellows.png" alt="Profile Image" className="rounded-full cursor-pointer object-cover max-h-12" priority />
+      <img src="/fellows.png" alt="Profile Image" className="rounded-full cursor-pointer object-cover max-h-12" />
       <div className="flex flex-col">
         <div className="flex gap-2 items-center flex-wrap">
           <p className="font-bold hover:underline cursor-pointer">{username}</p>
