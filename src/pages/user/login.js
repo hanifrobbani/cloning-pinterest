@@ -31,7 +31,6 @@ const LoginForm = () => {
 
       const data = await response.json();
 
-      // Jika login sukses
       if (response.ok) {
         // Simpan token di cookie
         Cookies.set("token", data.access_token, { expires: 1 });
