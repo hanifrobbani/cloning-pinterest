@@ -26,6 +26,7 @@ const Post = (props) => {
       } catch (error) {
         console.error('Error fetching data:', error);
       }
+
     };
 
     fetchData();

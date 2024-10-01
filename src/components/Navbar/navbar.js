@@ -77,9 +77,9 @@ const Navbar = () => {
             />
           </li>
           <li className="hover:bg-slate-200 cursor-pointer p-3 rounded-full">
-            <div className="bg-indigo-600 text-white font-semibold px-2 py-1 rounded-full">
+            <Link  href="/user" className="block bg-indigo-600 text-white font-semibold px-2 py-1 rounded-full">
               <p>M</p>
-            </div>
+            </Link>
           </li>
         </ul>
       </nav>

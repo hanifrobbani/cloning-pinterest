@@ -5,6 +5,7 @@ import Comment from "../../../components/layouts/CardLayout/Comment";
 import UserInfo from "../../../components/layouts/CardLayout/UserInfo";
 import ActionButton from "../../../components/layouts/CardLayout/ActionButton";
 import Post from "../index";
+import Cookies from "js-cookie";
 
 const CardActions = ({ postId }) => {
   const [isLiked, setIsLiked] = useState(false);
@@ -29,18 +30,21 @@ const CardActions = ({ postId }) => {
 
   const handleLike = async () => {
     try {
+      const token = Cookies.get("token");
+
       const response = await fetch(
         `http://127.0.0.1:8000/api/post/${postId}/like`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Sertakan token dalam header
           },
         }
       );
       const data = await response.json();
-      setIsLiked(data.is_liked);
-      setLikeCount(data.like_count);
+      setIsLiked(data.like_status);
+      setLikeCount(data.total_likes);
     } catch (error) {
       console.error("Error toggling like:", error);
     }
@@ -75,6 +79,7 @@ const CardDetail = () => {
   const [card, setCard] = useState(null); // State for fetched post data
   const [comments, setComments] = useState([]); // State for comments
   const [newComment, setNewComment] = useState(""); // State for new comment
+  // const [commentInfo, setCommentInfo] = useState(""); // State for validasi comment
   const [isCommentsVisible, setIsCommentsVisible] = useState(true);
   const cardRef = useRef(null);
   const [maxInputTop, setMaxInputTop] = useState(0);
@@ -106,12 +111,11 @@ const CardDetail = () => {
         const result = await response.json();
 
         if (result.success) {
-          // Filter comments where is_approved is true
+          // Hanya tampilkan komentar yang sudah disetujui (is_approved === 1)
           const approvedComments = result.data.filter(
             (comment) => comment.is_approved === 1
           );
-
-          setComments(approvedComments); // Update the state with approved comments
+          setComments(approvedComments); // Update state dengan komentar yang sudah disetujui
         } else {
           console.error("Error fetching comments:", result.message);
         }
@@ -123,7 +127,7 @@ const CardDetail = () => {
     fetchComments();
   }, [id]);
 
-  // Handle adding new comment
+  // Handle menambahkan komentar baru
   const handleAddComment = async () => {
     if (newComment.trim() === "") return;
 
@@ -141,8 +145,13 @@ const CardDetail = () => {
 
       if (response.ok) {
         const result = await response.json();
-        setComments((prevComments) => [...prevComments, result.data]); // Add new comment to list
-        setNewComment(""); // Clear input
+
+        // Jangan tambahkan komentar langsung ke state karena is_approved default-nya false
+        console.log("Comment added but awaiting approval:", result.data);
+        alert('Komentar berhasil di tambahkan, mohon menunggu agar admin memvalidasi komentar anda')
+
+        // Bersihkan input setelah komentar ditambahkan
+        setNewComment("");
       }
     } catch (error) {
       console.error("Error adding comment:", error);
@@ -176,7 +185,7 @@ const CardDetail = () => {
   }, []);
 
   if (!card) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
@@ -194,7 +203,6 @@ const CardDetail = () => {
             className="mr-2"
           />
         </button>
-
         <div
           ref={cardRef}
           className="flex flex-col md:flex-row justify-center w-full max-h-[100rem] rounded-3xl relative"

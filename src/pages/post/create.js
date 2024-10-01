@@ -28,12 +28,12 @@ const CreatePost = () => {
     formData.append("title", title);
     // formData.append("description", description);
     formData.append("user", user.name); // Asumsikan user sudah ada di localStorage
-    if(file) {
+    if (file) {
       formData.append("image", file);
     }
 
     try {
-      const token = Cookies.get('token');
+      const token = Cookies.get("token");
       const response = await fetch("http://127.0.0.1:8000/api/posts", {
         method: "POST",
         headers: {

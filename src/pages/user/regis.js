@@ -60,8 +60,7 @@ const RegisForm = () => {
         </div>
         <form
           className="flex flex-col justify-center max-w-xs m-auto"
-          onSubmit={handleSubmit}
-        >
+          onSubmit={handleSubmit}>
           {errorMessage && (
             <p className="text-red-500 text-center mb-4">{errorMessage}</p>
           )}
