@@ -34,10 +34,10 @@ const Navbar = () => {
           </li>
           <li
             className={`font-semibold ${
-              router.pathname === "/about" ? "bg-black text-white" : ""
+              router.pathname === "/post/create" ? "bg-black text-white" : ""
             } py-3 px-4 rounded-full`}
           >
-            <Link href="/about">Buat</Link>
+            <Link href="/post/create">Buat</Link>
           </li>
           <li className="flex-grow">
             <div className="relative flex items-center w-full cursor-pointer">
