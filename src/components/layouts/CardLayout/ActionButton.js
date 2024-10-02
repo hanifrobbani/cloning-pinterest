@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const ActionButton = ({ iconSrc, altText, onClick, isActive }) => (
   <div 
-    className={`p-1 hover:bg-slate-200 rounded-full transition cursor-pointer ${isActive ? 'bg-slate-200' : ''}`}
+    className={`p-1 hover:bg-slate-200 rounded-full transition cursor-pointer}`}
     onClick={onClick}
   >
     <Image 
@@ -11,7 +11,7 @@ const ActionButton = ({ iconSrc, altText, onClick, isActive }) => (
       width={25} 
       height={25} 
       priority 
-      className={isActive ? 'filter brightness-75' : ''}
+      className="cursor-pointer"
     />
   </div>
 );
