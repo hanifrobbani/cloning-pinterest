@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Container from "../../components/Card/container";
+import Header from "@/components/head/header";
 
 // Fungsi untuk menghasilkan angka acak (optional)
 const generateRandomNumber = () => Math.floor(Math.random() * 1000);
@@ -34,6 +35,10 @@ const Post = (props) => {
 
   return (
     <div>
+      <Header
+        title="Post"
+        meta_description="Halaman postingan user"
+       />
       <div className={`p-4 md:${padding} w-full`}>
         <Container cards={cardsData} />
       </div>
